@@ -1,0 +1,6 @@
+<div class="p-4 max-w-lg mx-auto">
+  <h2 class="text-xl font-semibold mb-2">Students</h2>
+  <ul class="list-disc pl-5">
+    <li *ngFor="let s of (students$ | async)">{{ s.username }} ({{ s.role }})</li>
+  </ul>
+</div>

@@ -1,0 +1,20 @@
+<div class="max-w-sm mx-auto mt-10 p-4 bg-white shadow rounded">
+<form [formGroup]="form" (ngSubmit)="login()" class="space-y-2">
+  <label class="block">
+    <span>Username</span>
+    <input type="text" formControlName="username" class="border rounded w-full" />
+  </label>
+  <label class="block">
+    <span>Password</span>
+    <input type="password" formControlName="password" class="border rounded w-full" />
+  </label>
+  <label class="block">
+    <span>Role</span>
+    <select formControlName="role" class="border rounded w-full">
+      <option value="student">Student</option>
+      <option value="tutor">Tutor</option>
+    </select>
+  </label>
+  <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded w-full">Login</button>
+</form>
+</div>

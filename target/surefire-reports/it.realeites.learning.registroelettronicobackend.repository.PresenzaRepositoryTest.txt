@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: it.realeites.learning.registroelettronicobackend.repository.PresenzaRepositoryTest
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.561 s -- in it.realeites.learning.registroelettronicobackend.repository.PresenzaRepositoryTest
