@@ -4,7 +4,13 @@
       "Bash(mvn test:*)",
       "Bash(rg:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(mvn clean:*)"
+      "Bash(mvn clean:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run:*)",
+      "Bash(npm test:*)"
     ],
     "deny": []
   }
