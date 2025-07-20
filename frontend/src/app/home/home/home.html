@@ -1,0 +1,43 @@
+<div class="animated-background"></div>
+<div class="floating-shapes">
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<nav class="glass-card-dark backdrop-blur-md sticky top-0 z-50 border-b border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <h1 class="text-xl font-bold text-white">Registro Elettronico del gruppo due</h1>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a routerLink="/login" class="bg-accent hover:bg-accent/90 text-white px-6 py-2.5 rounded-lg font-medium">Login</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="text-center mb-16">
+    <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+      Piattaforma digitale per studenti e tutor per il monitoraggio delle presenze e la gestione delle giustificazioni
+    </p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-8 mb-16">
+    <div class="glass-card-dark rounded-2xl p-8 card-hover border border-gray-700">
+      <h3 class="text-2xl font-bold text-white mb-4">Area Studenti</h3>
+      <p class="text-gray-300 mb-6 leading-relaxed">Registra le tue presenze quotidiane e gestisci le giustificazioni.</p>
+      <a routerLink="/login?role=student" class="inline-block bg-accent hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-medium">Accedi come Studente</a>
+    </div>
+    <div class="glass-card-dark rounded-2xl p-8 card-hover border border-gray-700">
+      <h3 class="text-2xl font-bold text-white mb-4">Area Tutor</h3>
+      <p class="text-gray-300 mb-6 leading-relaxed">Monitora gli studenti e approva presenze e giustificazioni.</p>
+      <a routerLink="/login?role=tutor" class="inline-block bg-accent-orange hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium">Accedi come Tutor</a>
+    </div>
+  </div>
+</main>
+<footer class="glass-card-dark mt-16 py-8 border-t border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-gray-300">&copy; Progetto sviluppato dal gruppo due.</p>
+  </div>
+</footer>

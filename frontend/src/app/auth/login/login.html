@@ -1,0 +1,25 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div class="text-center">
+      <h2 class="mt-6 text-3xl font-bold text-white">Accedi al tuo account</h2>
+    </div>
+    <div class="glass-card-dark rounded-2xl p-8 space-y-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-200">Email</label>
+          <input formControlName="email" type="email" required
+            class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg shadow-sm placeholder-gray-400 text-white"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-200">Password</label>
+          <input formControlName="password" type="password" required
+            class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg shadow-sm placeholder-gray-400 text-white"/>
+        </div>
+        <button type="submit"
+          class="w-full flex justify-center py-3 px-4 rounded-lg text-sm font-medium text-white bg-accent hover:bg-accent/90">
+          Accedi
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
