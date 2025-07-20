@@ -1,0 +1,17 @@
+# Java build output
+/target/
+
+# Node modules
+/angular-frontend/node_modules/
+
+# Angular build output
+dist/
+
+# IDE settings
+/.idea/
+.vscode/
+
+# Mac/Windows files
+.DS_Store
+Thumbs.db
+
