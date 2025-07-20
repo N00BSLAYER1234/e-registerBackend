@@ -1,15 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Global utility classes from original project */
-.animated-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(-45deg,#1a202c,#4a5568,#2c5282,#718096); background-size: 400% 400%; animation: gradientShift 15s ease infinite; }
-.floating-shapes { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
-.shape { position:absolute; border-radius:50%; background:rgba(255,255,255,0.05); animation: float 6s ease-in-out infinite; }
+:root {
+    --primary-matte: #4a5568;
+    --primary-dark: #2d3748;
+    --secondary-matte: #718096;
+    --accent-matte: #4fd1c7;
+    --accent-orange: #ed8936;
+
+    --bg-primary: #f7fafc;
+    --bg-secondary: #edf2f7;
+    --bg-card: #ffffff;
+    --bg-matte-dark: #1a202c;
+    --bg-matte-blue: #2c5282;
+
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --text-white: #ffffff;
+
+    --success-matte: #38a169;
+    --warning-matte: #d69e2e;
+    --error-matte: #e53e3e;
+    --info-matte: #3182ce;
+}
+
+* { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+
+.fade-in { animation: fadeIn 0.6s ease-in-out; }
+.fade-in-delay { animation: fadeIn 0.8s ease-in-out 0.2s both; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+
+.card-hover { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+.card-hover:hover { transform: translateY(-8px); box-shadow:0 25px 50px rgba(0,0,0,0.15); }
+
+.feature-card { padding:1.5rem; border-radius:1rem; transition:all 0.3s ease; }
+.feature-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+
+.role-btn.active { border-color:#6366f1; background-color:rgba(99,102,241,0.05); box-shadow:0 4px 12px rgba(99,102,241,0.2); }
+.role-btn.active.tutor { border-color:#06b6d4; background-color:rgba(6,182,212,0.05); box-shadow:0 4px 12px rgba(6,182,212,0.2); }
+
+.loading { position:relative; pointer-events:none; }
+.loading::after { content:''; position:absolute; top:50%; left:50%; width:20px; height:20px; margin-top:-10px; margin-left:-10px; border:2px solid #f3f4f6; border-top:2px solid #6366f1; border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+.status-indicator {display:inline-flex; align-items:center; padding:0.25rem 0.75rem; border-radius:9999px; font-size:0.75rem; font-weight:500; line-height:1.25; }
+.status-pending {background-color:#fef3c7; color:#d97706;}
+.status-approved {background-color:#d1fae5; color:#059669;}
+.status-rejected {background-color:#fee2e2; color:#dc2626;}
+
+.calendar-day {aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:0.5rem; font-size:0.875rem; font-weight:500; cursor:pointer; transition:all 0.2s ease; position:relative;}
+.calendar-day:hover {background-color:#f3f4f6;}
+.calendar-day.present {background-color:#10b981; color:white;}
+.calendar-day.absent {background-color:#ef4444; color:white;}
+.calendar-day.justified {background-color:#f59e0b; color:white;}
+.calendar-day.today {border:2px solid #6366f1; font-weight:600;}
+
+.animated-background {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:linear-gradient(-45deg,var(--bg-matte-dark),var(--primary-matte),var(--bg-matte-blue),var(--secondary-matte)); background-size:400% 400%; animation:gradientShift 15s ease infinite;}
+.animated-background::before {content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(circle at 20% 80%, rgba(79,209,199,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(237,137,54,0.1) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(74,85,104,0.1) 0%, transparent 50%); animation:backgroundFloat 20s ease-in-out infinite;}
+
+.floating-shapes {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none;}
+.shape {position:absolute; border-radius:50%; background:rgba(255,255,255,0.05); animation:float 6s ease-in-out infinite;}
 .shape:nth-child(1){width:80px;height:80px;top:10%;left:20%;animation-delay:0s;}
 .shape:nth-child(2){width:120px;height:120px;top:70%;left:80%;animation-delay:2s;}
 .shape:nth-child(3){width:60px;height:60px;top:40%;left:70%;animation-delay:4s;}
 .shape:nth-child(4){width:100px;height:100px;top:80%;left:10%;animation-delay:1s;}
-@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0)}33%{transform:translateY(-30px) rotate(120deg)}66%{transform:translateY(10px) rotate(240deg)}}
-.glass-card-dark{background:rgba(26,32,44,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 25px 45px rgba(0,0,0,0.2);}
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+@keyframes backgroundFloat{0%,100%{transform:translateY(0px);}50%{transform:translateY(-20px);}}
+@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg);}33%{transform:translateY(-30px) rotate(120deg);}66%{transform:translateY(10px) rotate(240deg);}}
+
+.glass-card-dark{background:rgba(26,32,44,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 25px 45px rgba(0,0,0,0.2);}
+
 .bg-accent{background-color:#4fd1c7;}
 .bg-accent-orange{background-color:#ed8936;}
+
+@media(max-width:768px){.card-hover:hover{transform:none;box-shadow:0 10px 25px rgba(0,0,0,0.1);} .feature-card:hover{transform:none;}}
