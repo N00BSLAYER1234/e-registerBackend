@@ -1,0 +1,1659 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/frontend/.editorconfig b/frontend/.editorconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..f166060da1cbc9f216e9f5e99a1ef6074ce2a8f8
+--- /dev/null
++++ b/frontend/.editorconfig
+@@ -0,0 +1,17 @@
++# Editor configuration, see https://editorconfig.org
++root = true
++
++[*]
++charset = utf-8
++indent_style = space
++indent_size = 2
++insert_final_newline = true
++trim_trailing_whitespace = true
++
++[*.ts]
++quote_type = single
++ij_typescript_use_double_quotes = false
++
++[*.md]
++max_line_length = off
++trim_trailing_whitespace = false
+diff --git a/frontend/.gitignore b/frontend/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..cc7b141350ffde43afce3ec16ea4d7b5007cde2b
+--- /dev/null
++++ b/frontend/.gitignore
+@@ -0,0 +1,42 @@
++# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
++
++# Compiled output
++/dist
++/tmp
++/out-tsc
++/bazel-out
++
++# Node
++/node_modules
++npm-debug.log
++yarn-error.log
++
++# IDEs and editors
++.idea/
++.project
++.classpath
++.c9/
++*.launch
++.settings/
++*.sublime-workspace
++
++# Visual Studio Code
++.vscode/*
++!.vscode/settings.json
++!.vscode/tasks.json
++!.vscode/launch.json
++!.vscode/extensions.json
++.history/*
++
++# Miscellaneous
++/.angular/cache
++.sass-cache/
++/connect.lock
++/coverage
++/libpeerconnection.log
++testem.log
++/typings
++
++# System files
++.DS_Store
++Thumbs.db
+diff --git a/frontend/.vscode/extensions.json b/frontend/.vscode/extensions.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..77b374577de83b86d846eadda2dd17532d7dabaa
+--- /dev/null
++++ b/frontend/.vscode/extensions.json
+@@ -0,0 +1,4 @@
++{
++  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
++  "recommendations": ["angular.ng-template"]
++}
+diff --git a/frontend/.vscode/launch.json b/frontend/.vscode/launch.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..925af837050a4abe679c5fea0df7e41faf6fc011
+--- /dev/null
++++ b/frontend/.vscode/launch.json
+@@ -0,0 +1,20 @@
++{
++  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
++  "version": "0.2.0",
++  "configurations": [
++    {
++      "name": "ng serve",
++      "type": "chrome",
++      "request": "launch",
++      "preLaunchTask": "npm: start",
++      "url": "http://localhost:4200/"
++    },
++    {
++      "name": "ng test",
++      "type": "chrome",
++      "request": "launch",
++      "preLaunchTask": "npm: test",
++      "url": "http://localhost:9876/debug.html"
++    }
++  ]
++}
+diff --git a/frontend/.vscode/tasks.json b/frontend/.vscode/tasks.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..a298b5bd8796ac377fe9ed64caa249e24c7ec3b6
+--- /dev/null
++++ b/frontend/.vscode/tasks.json
+@@ -0,0 +1,42 @@
++{
++  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
++  "version": "2.0.0",
++  "tasks": [
++    {
++      "type": "npm",
++      "script": "start",
++      "isBackground": true,
++      "problemMatcher": {
++        "owner": "typescript",
++        "pattern": "$tsc",
++        "background": {
++          "activeOnStart": true,
++          "beginsPattern": {
++            "regexp": "(.*?)"
++          },
++          "endsPattern": {
++            "regexp": "bundle generation complete"
++          }
++        }
++      }
++    },
++    {
++      "type": "npm",
++      "script": "test",
++      "isBackground": true,
++      "problemMatcher": {
++        "owner": "typescript",
++        "pattern": "$tsc",
++        "background": {
++          "activeOnStart": true,
++          "beginsPattern": {
++            "regexp": "(.*?)"
++          },
++          "endsPattern": {
++            "regexp": "bundle generation complete"
++          }
++        }
++      }
++    }
++  ]
++}
+diff --git a/frontend/README.md b/frontend/README.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..94f2f140ddcccb330b29976cd797ab30172b68bb
+--- /dev/null
++++ b/frontend/README.md
+@@ -0,0 +1,59 @@
++# Frontend
++
++This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.1.
++
++## Development server
++
++To start a local development server, run:
++
++```bash
++ng serve
++```
++
++Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
++
++## Code scaffolding
++
++Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
++
++```bash
++ng generate component component-name
++```
++
++For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
++
++```bash
++ng generate --help
++```
++
++## Building
++
++To build the project run:
++
++```bash
++ng build
++```
++
++This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
++
++## Running unit tests
++
++To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
++
++```bash
++ng test
++```
++
++## Running end-to-end tests
++
++For end-to-end (e2e) testing, run:
++
++```bash
++ng e2e
++```
++
++Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
++
++## Additional Resources
++
++For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+diff --git a/frontend/angular.json b/frontend/angular.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..738476bf23bf601ecc8c8d7f2e014e18747ed971
+--- /dev/null
++++ b/frontend/angular.json
+@@ -0,0 +1,102 @@
++{
++  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
++  "version": 1,
++  "newProjectRoot": "projects",
++  "projects": {
++    "frontend": {
++      "projectType": "application",
++      "schematics": {
++        "@schematics/angular:component": {
++          "standalone": false
++        },
++        "@schematics/angular:directive": {
++          "standalone": false
++        },
++        "@schematics/angular:pipe": {
++          "standalone": false
++        }
++      },
++      "root": "",
++      "sourceRoot": "src",
++      "prefix": "app",
++      "architect": {
++        "build": {
++          "builder": "@angular/build:application",
++          "options": {
++            "browser": "src/main.ts",
++            "polyfills": [
++              "zone.js"
++            ],
++            "tsConfig": "tsconfig.app.json",
++            "assets": [
++              {
++                "glob": "**/*",
++                "input": "public"
++              }
++            ],
++            "styles": [
++              "src/styles.css"
++            ]
++          },
++          "configurations": {
++            "production": {
++              "budgets": [
++                {
++                  "type": "initial",
++                  "maximumWarning": "500kB",
++                  "maximumError": "1MB"
++                },
++                {
++                  "type": "anyComponentStyle",
++                  "maximumWarning": "4kB",
++                  "maximumError": "8kB"
++                }
++              ],
++              "outputHashing": "all"
++            },
++            "development": {
++              "optimization": false,
++              "extractLicenses": false,
++              "sourceMap": true
++            }
++          },
++          "defaultConfiguration": "production"
++        },
++        "serve": {
++          "builder": "@angular/build:dev-server",
++          "configurations": {
++            "production": {
++              "buildTarget": "frontend:build:production"
++            },
++            "development": {
++              "buildTarget": "frontend:build:development"
++            }
++          },
++          "defaultConfiguration": "development"
++        },
++        "extract-i18n": {
++          "builder": "@angular/build:extract-i18n"
++        },
++        "test": {
++          "builder": "@angular/build:karma",
++          "options": {
++            "polyfills": [
++              "zone.js",
++              "zone.js/testing"
++            ],
++            "tsConfig": "tsconfig.spec.json",
++            "assets": [
++              {
++                "glob": "**/*",
++                "input": "public"
++              }
++            ],
++            "styles": [
++              "src/styles.css"
++            ]
++          }
++        }
++      }
++    }
++  }
++}
+diff --git a/frontend/package.json b/frontend/package.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..dea8862fb01f24fcf2988182b20fa297bc3aa183
+--- /dev/null
++++ b/frontend/package.json
+@@ -0,0 +1,46 @@
++{
++  "name": "frontend",
++  "version": "0.0.0",
++  "scripts": {
++    "ng": "ng",
++    "start": "ng serve",
++    "build": "ng build",
++    "watch": "ng build --watch --configuration development",
++    "test": "ng test"
++  },
++  "prettier": {
++    "overrides": [
++      {
++        "files": "*.html",
++        "options": {
++          "parser": "angular"
++        }
++      }
++    ]
++  },
++  "private": true,
++  "dependencies": {
++    "@angular/common": "^20.1.0",
++    "@angular/compiler": "^20.1.0",
++    "@angular/core": "^20.1.0",
++    "@angular/forms": "^20.1.0",
++    "@angular/platform-browser": "^20.1.0",
++    "@angular/router": "^20.1.0",
++    "rxjs": "~7.8.0",
++    "tslib": "^2.3.0",
++    "zone.js": "~0.15.0"
++  },
++  "devDependencies": {
++    "@angular/build": "^20.1.1",
++    "@angular/cli": "^20.1.1",
++    "@angular/compiler-cli": "^20.1.0",
++    "@types/jasmine": "~5.1.0",
++    "jasmine-core": "~5.8.0",
++    "karma": "~6.4.0",
++    "karma-chrome-launcher": "~3.2.0",
++    "karma-coverage": "~2.2.0",
++    "karma-jasmine": "~5.1.0",
++    "karma-jasmine-html-reporter": "~2.1.0",
++    "typescript": "~5.8.2"
++  }
++}
+diff --git a/frontend/public/favicon.ico b/frontend/public/favicon.ico
+new file mode 100644
+index 0000000000000000000000000000000000000000..57614f9c967596fad0a3989bec2b1deff33034f6
+GIT binary patch
+literal 15086
+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
+Nr__JTFzvMr^FKp4S3v*(
+
+literal 0
+HcmV?d00001
+
+diff --git a/frontend/src/app/app-module.ts b/frontend/src/app/app-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..09b0c4711fc945610227ab57668f236ae80ab34f
+--- /dev/null
++++ b/frontend/src/app/app-module.ts
+@@ -0,0 +1,38 @@
++import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
++import { BrowserModule } from '@angular/platform-browser';
++import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
++
++import { AppRoutingModule } from './app-routing-module';
++import { App } from './app';
++import { CoreModule } from './core/core-module';
++import { SharedModule } from './shared/shared-module';
++import { AuthModule } from './auth/auth-module';
++import { StudentDashboardModule } from './student-dashboard/student-dashboard-module';
++import { TutorDashboardModule } from './tutor-dashboard/tutor-dashboard-module';
++import { HomeModule } from './home/home-module';
++import { authInterceptor } from './core/interceptors/auth.interceptor';
++import { errorInterceptor } from './core/interceptors/error.interceptor';
++
++@NgModule({
++  declarations: [
++    App
++  ],
++  imports: [
++    BrowserModule,
++    HttpClientModule,
++    AppRoutingModule,
++    CoreModule,
++    SharedModule,
++    AuthModule,
++    StudentDashboardModule,
++    TutorDashboardModule,
++    HomeModule
++  ],
++  providers: [
++    provideBrowserGlobalErrorListeners(),
++    { provide: HTTP_INTERCEPTORS, useValue: authInterceptor, multi: true },
++    { provide: HTTP_INTERCEPTORS, useValue: errorInterceptor, multi: true }
++  ],
++  bootstrap: [App]
++})
++export class AppModule { }
+diff --git a/frontend/src/app/app-routing-module.ts b/frontend/src/app/app-routing-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..02972627f8df364102ce4ede71c8bd5f3660e1d8
+--- /dev/null
++++ b/frontend/src/app/app-routing-module.ts
+@@ -0,0 +1,10 @@
++import { NgModule } from '@angular/core';
++import { RouterModule, Routes } from '@angular/router';
++
++const routes: Routes = [];
++
++@NgModule({
++  imports: [RouterModule.forRoot(routes)],
++  exports: [RouterModule]
++})
++export class AppRoutingModule { }
+diff --git a/frontend/src/app/app.css b/frontend/src/app/app.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/frontend/src/app/app.html b/frontend/src/app/app.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..7528372419131ced5c6c02f3207ddf4acd069361
+--- /dev/null
++++ b/frontend/src/app/app.html
+@@ -0,0 +1,342 @@
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
++<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
++<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
++<!-- * * * * * * * to get started with your project! * * * * * * * -->
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++
++<style>
++  :host {
++    --bright-blue: oklch(51.01% 0.274 263.83);
++    --electric-violet: oklch(53.18% 0.28 296.97);
++    --french-violet: oklch(47.66% 0.246 305.88);
++    --vivid-pink: oklch(69.02% 0.277 332.77);
++    --hot-red: oklch(61.42% 0.238 15.34);
++    --orange-red: oklch(63.32% 0.24 31.68);
++
++    --gray-900: oklch(19.37% 0.006 300.98);
++    --gray-700: oklch(36.98% 0.014 302.71);
++    --gray-400: oklch(70.9% 0.015 304.04);
++
++    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
++      180deg,
++      var(--orange-red) 0%,
++      var(--vivid-pink) 50%,
++      var(--electric-violet) 100%
++    );
++
++    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
++      90deg,
++      var(--orange-red) 0%,
++      var(--vivid-pink) 50%,
++      var(--electric-violet) 100%
++    );
++
++    --pill-accent: var(--bright-blue);
++
++    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
++      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
++      "Segoe UI Symbol";
++    box-sizing: border-box;
++    -webkit-font-smoothing: antialiased;
++    -moz-osx-font-smoothing: grayscale;
++  }
++
++  h1 {
++    font-size: 3.125rem;
++    color: var(--gray-900);
++    font-weight: 500;
++    line-height: 100%;
++    letter-spacing: -0.125rem;
++    margin: 0;
++    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
++      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
++      "Segoe UI Symbol";
++  }
++
++  p {
++    margin: 0;
++    color: var(--gray-700);
++  }
++
++  main {
++    width: 100%;
++    min-height: 100%;
++    display: flex;
++    justify-content: center;
++    align-items: center;
++    padding: 1rem;
++    box-sizing: inherit;
++    position: relative;
++  }
++
++  .angular-logo {
++    max-width: 9.2rem;
++  }
++
++  .content {
++    display: flex;
++    justify-content: space-around;
++    width: 100%;
++    max-width: 700px;
++    margin-bottom: 3rem;
++  }
++
++  .content h1 {
++    margin-top: 1.75rem;
++  }
++
++  .content p {
++    margin-top: 1.5rem;
++  }
++
++  .divider {
++    width: 1px;
++    background: var(--red-to-pink-to-purple-vertical-gradient);
++    margin-inline: 0.5rem;
++  }
++
++  .pill-group {
++    display: flex;
++    flex-direction: column;
++    align-items: start;
++    flex-wrap: wrap;
++    gap: 1.25rem;
++  }
++
++  .pill {
++    display: flex;
++    align-items: center;
++    --pill-accent: var(--bright-blue);
++    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
++    color: var(--pill-accent);
++    padding-inline: 0.75rem;
++    padding-block: 0.375rem;
++    border-radius: 2.75rem;
++    border: 0;
++    transition: background 0.3s ease;
++    font-family: var(--inter-font);
++    font-size: 0.875rem;
++    font-style: normal;
++    font-weight: 500;
++    line-height: 1.4rem;
++    letter-spacing: -0.00875rem;
++    text-decoration: none;
++    white-space: nowrap;
++  }
++
++  .pill:hover {
++    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
++  }
++
++  .pill-group .pill:nth-child(6n + 1) {
++    --pill-accent: var(--bright-blue);
++  }
++  .pill-group .pill:nth-child(6n + 2) {
++    --pill-accent: var(--electric-violet);
++  }
++  .pill-group .pill:nth-child(6n + 3) {
++    --pill-accent: var(--french-violet);
++  }
++
++  .pill-group .pill:nth-child(6n + 4),
++  .pill-group .pill:nth-child(6n + 5),
++  .pill-group .pill:nth-child(6n + 6) {
++    --pill-accent: var(--hot-red);
++  }
++
++  .pill-group svg {
++    margin-inline-start: 0.25rem;
++  }
++
++  .social-links {
++    display: flex;
++    align-items: center;
++    gap: 0.73rem;
++    margin-top: 1.5rem;
++  }
++
++  .social-links path {
++    transition: fill 0.3s ease;
++    fill: var(--gray-400);
++  }
++
++  .social-links a:hover svg path {
++    fill: var(--gray-900);
++  }
++
++  @media screen and (max-width: 650px) {
++    .content {
++      flex-direction: column;
++      width: max-content;
++    }
++
++    .divider {
++      height: 1px;
++      width: 100%;
++      background: var(--red-to-pink-to-purple-horizontal-gradient);
++      margin-block: 1.5rem;
++    }
++  }
++</style>
++
++<main class="main">
++  <div class="content">
++    <div class="left-side">
++      <svg
++        xmlns="http://www.w3.org/2000/svg"
++        viewBox="0 0 982 239"
++        fill="none"
++        class="angular-logo"
++      >
++        <g clip-path="url(#a)">
++          <path
++            fill="url(#b)"
++            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
++          />
++          <path
++            fill="url(#c)"
++            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
++          />
++        </g>
++        <defs>
++          <radialGradient
++            id="c"
++            cx="0"
++            cy="0"
++            r="1"
++            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
++            gradientUnits="userSpaceOnUse"
++          >
++            <stop stop-color="#FF41F8" />
++            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
++            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
++          </radialGradient>
++          <linearGradient
++            id="b"
++            x1="0"
++            x2="982"
++            y1="192"
++            y2="192"
++            gradientUnits="userSpaceOnUse"
++          >
++            <stop stop-color="#F0060B" />
++            <stop offset="0" stop-color="#F0070C" />
++            <stop offset=".526" stop-color="#CC26D5" />
++            <stop offset="1" stop-color="#7702FF" />
++          </linearGradient>
++          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
++        </defs>
++      </svg>
++      <h1>Hello, {{ title() }}</h1>
++      <p>Congratulations! Your app is running. 🎉</p>
++    </div>
++    <div class="divider" role="separator" aria-label="Divider"></div>
++    <div class="right-side">
++      <div class="pill-group">
++        @for (item of [
++          { title: 'Explore the Docs', link: 'https://angular.dev' },
++          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
++          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai'},
++          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
++          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
++          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
++        ]; track item.title) {
++          <a
++            class="pill"
++            [href]="item.link"
++            target="_blank"
++            rel="noopener"
++          >
++            <span>{{ item.title }}</span>
++            <svg
++              xmlns="http://www.w3.org/2000/svg"
++              height="14"
++              viewBox="0 -960 960 960"
++              width="14"
++              fill="currentColor"
++            >
++              <path
++                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
++              />
++            </svg>
++          </a>
++        }
++      </div>
++      <div class="social-links">
++        <a
++          href="https://github.com/angular/angular"
++          aria-label="Github"
++          target="_blank"
++          rel="noopener"
++        >
++          <svg
++            width="25"
++            height="24"
++            viewBox="0 0 25 24"
++            fill="none"
++            xmlns="http://www.w3.org/2000/svg"
++            alt="Github"
++          >
++            <path
++              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
++            />
++          </svg>
++        </a>
++        <a
++          href="https://twitter.com/angular"
++          aria-label="Twitter"
++          target="_blank"
++          rel="noopener"
++        >
++          <svg
++            width="24"
++            height="24"
++            viewBox="0 0 24 24"
++            fill="none"
++            xmlns="http://www.w3.org/2000/svg"
++            alt="Twitter"
++          >
++            <path
++              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
++            />
++          </svg>
++        </a>
++        <a
++          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
++          aria-label="Youtube"
++          target="_blank"
++          rel="noopener"
++        >
++          <svg
++            width="29"
++            height="20"
++            viewBox="0 0 29 20"
++            fill="none"
++            xmlns="http://www.w3.org/2000/svg"
++            alt="Youtube"
++          >
++            <path
++              fill-rule="evenodd"
++              clip-rule="evenodd"
++              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
++            />
++          </svg>
++        </a>
++      </div>
++    </div>
++  </div>
++</main>
++
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
++<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
++<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
++<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
++
++
++<router-outlet />
+diff --git a/frontend/src/app/app.spec.ts b/frontend/src/app/app.spec.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..52727427ce99a99219c9ac2b1d9263021e6ae52b
+--- /dev/null
++++ b/frontend/src/app/app.spec.ts
+@@ -0,0 +1,29 @@
++import { TestBed } from '@angular/core/testing';
++import { RouterModule } from '@angular/router';
++import { App } from './app';
++
++describe('App', () => {
++  beforeEach(async () => {
++    await TestBed.configureTestingModule({
++      imports: [
++        RouterModule.forRoot([])
++      ],
++      declarations: [
++        App
++      ],
++    }).compileComponents();
++  });
++
++  it('should create the app', () => {
++    const fixture = TestBed.createComponent(App);
++    const app = fixture.componentInstance;
++    expect(app).toBeTruthy();
++  });
++
++  it('should render title', () => {
++    const fixture = TestBed.createComponent(App);
++    fixture.detectChanges();
++    const compiled = fixture.nativeElement as HTMLElement;
++    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, frontend');
++  });
++});
+diff --git a/frontend/src/app/app.ts b/frontend/src/app/app.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..dc41b9e7b65fcdf0692672fdbfe0849f28b2b70e
+--- /dev/null
++++ b/frontend/src/app/app.ts
+@@ -0,0 +1,11 @@
++import { Component, signal } from '@angular/core';
++
++@Component({
++  selector: 'app-root',
++  templateUrl: './app.html',
++  standalone: false,
++  styleUrl: './app.css'
++})
++export class App {
++  protected readonly title = signal('frontend');
++}
+diff --git a/frontend/src/app/auth/auth-module.ts b/frontend/src/app/auth/auth-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..d2e4fae6f86c813833e6f24066c50b4076a0d599
+--- /dev/null
++++ b/frontend/src/app/auth/auth-module.ts
+@@ -0,0 +1,12 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++
++
++
++@NgModule({
++  declarations: [],
++  imports: [
++    CommonModule
++  ]
++})
++export class AuthModule { }
+diff --git a/frontend/src/app/core/core-module.ts b/frontend/src/app/core/core-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..339a9110e79cdfebc90753a22a569599404ada29
+--- /dev/null
++++ b/frontend/src/app/core/core-module.ts
+@@ -0,0 +1,12 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++
++
++
++@NgModule({
++  declarations: [],
++  imports: [
++    CommonModule
++  ]
++})
++export class CoreModule { }
+diff --git a/frontend/src/app/core/guards/auth.guard.ts b/frontend/src/app/core/guards/auth.guard.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..68e134d21f5cbd3d05778fb9c17e5addde8d8882
+--- /dev/null
++++ b/frontend/src/app/core/guards/auth.guard.ts
+@@ -0,0 +1,7 @@
++import { inject } from '@angular/core';
++import { CanActivateFn } from '@angular/router';
++import { AuthService } from '../services/auth.service';
++
++export const authGuard: CanActivateFn = () => {
++  return inject(AuthService).currentUser$;
++};
+diff --git a/frontend/src/app/core/guards/role.guard.ts b/frontend/src/app/core/guards/role.guard.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..be43a2462fd76e60b363d13ab5c4c16594ecf8ce
+--- /dev/null
++++ b/frontend/src/app/core/guards/role.guard.ts
+@@ -0,0 +1,10 @@
++import { inject } from '@angular/core';
++import { CanActivateFn } from '@angular/router';
++import { AuthService } from '../services/auth.service';
++
++export function roleGuard(roles: string[]): CanActivateFn {
++  return () => {
++    const user = inject(AuthService).currentUser;
++    return user ? roles.includes(user.ruolo) : false;
++  };
++}
+diff --git a/frontend/src/app/core/interceptors/auth.interceptor.ts b/frontend/src/app/core/interceptors/auth.interceptor.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..2b4407043cdf16f53dce449d75770bc784b7ab24
+--- /dev/null
++++ b/frontend/src/app/core/interceptors/auth.interceptor.ts
+@@ -0,0 +1,9 @@
++import { inject } from '@angular/core';
++import { HttpInterceptorFn } from '@angular/common/http';
++import { AuthService } from '../services/auth.service';
++
++export const authInterceptor: HttpInterceptorFn = (req, next) => {
++  const token = inject(AuthService).currentUser?.token;
++  const authReq = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
++  return next(authReq);
++};
+diff --git a/frontend/src/app/core/interceptors/error.interceptor.ts b/frontend/src/app/core/interceptors/error.interceptor.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..eee46c1c4056d4a8624f576d8539582e15edf6da
+--- /dev/null
++++ b/frontend/src/app/core/interceptors/error.interceptor.ts
+@@ -0,0 +1,11 @@
++import { HttpInterceptorFn } from '@angular/common/http';
++import { catchError, throwError } from 'rxjs';
++
++export const errorInterceptor: HttpInterceptorFn = (req, next) => {
++  return next(req).pipe(
++    catchError(err => {
++      console.error('HTTP error', err);
++      return throwError(() => err);
++    })
++  );
++};
+diff --git a/frontend/src/app/core/services/api.service.ts b/frontend/src/app/core/services/api.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..ac2e4ce033555a23cbaff4e0e4d8ef3a4a324d88
+--- /dev/null
++++ b/frontend/src/app/core/services/api.service.ts
+@@ -0,0 +1,16 @@
++import { Injectable } from '@angular/core';
++import { HttpClient } from '@angular/common/http';
++import { Observable } from 'rxjs';
++
++@Injectable({ providedIn: 'root' })
++export class ApiService {
++  constructor(private http: HttpClient) {}
++
++  get<T>(endpoint: string): Observable<T> {
++    return this.http.get<T>(endpoint);
++  }
++
++  post<T>(endpoint: string, data: unknown): Observable<T> {
++    return this.http.post<T>(endpoint, data);
++  }
++}
+diff --git a/frontend/src/app/core/services/auth.service.ts b/frontend/src/app/core/services/auth.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..9dd1ed90ca42dfe655841e6627fa0a3d717c5f03
+--- /dev/null
++++ b/frontend/src/app/core/services/auth.service.ts
+@@ -0,0 +1,20 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject, Observable } from 'rxjs';
++import { User } from '../../models/user';
++
++@Injectable({ providedIn: 'root' })
++export class AuthService {
++  private currentUserSubject = new BehaviorSubject<User | null>(null);
++  currentUser$ = this.currentUserSubject.asObservable();
++  get currentUser(): User | null {
++    return this.currentUserSubject.value;
++  }
++
++  login(user: User): void {
++    this.currentUserSubject.next(user);
++  }
++
++  logout(): void {
++    this.currentUserSubject.next(null);
++  }
++}
+diff --git a/frontend/src/app/core/services/notification.service.ts b/frontend/src/app/core/services/notification.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..0cd529695998f215ff0be2c6c7461ee2290043c9
+--- /dev/null
++++ b/frontend/src/app/core/services/notification.service.ts
+@@ -0,0 +1,14 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { Notification } from '../../models/notification';
++
++@Injectable({ providedIn: 'root' })
++export class NotificationService {
++  private notificationsSubject = new BehaviorSubject<Notification[]>([]);
++  notifications$ = this.notificationsSubject.asObservable();
++
++  add(notification: Notification): void {
++    const current = this.notificationsSubject.value;
++    this.notificationsSubject.next([...current, notification]);
++  }
++}
+diff --git a/frontend/src/app/core/services/websocket.service.ts b/frontend/src/app/core/services/websocket.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..579a29e705d207b78a8756f2d515c3e49d361435
+--- /dev/null
++++ b/frontend/src/app/core/services/websocket.service.ts
+@@ -0,0 +1,16 @@
++import { Injectable } from '@angular/core';
++import { Observable, Subject } from 'rxjs';
++
++@Injectable({ providedIn: 'root' })
++export class WebSocketService {
++  private subject = new Subject<string>();
++  messages$ = this.subject.asObservable();
++
++  connect(): void {
++    // placeholder for socket.io-client connection
++  }
++
++  emit(message: string): void {
++    this.subject.next(message);
++  }
++}
+diff --git a/frontend/src/app/home/home-module.ts b/frontend/src/app/home/home-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..77230a865a07a7bc23cd54de6872bc75adf5b36a
+--- /dev/null
++++ b/frontend/src/app/home/home-module.ts
+@@ -0,0 +1,15 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++import { Home } from './home/home';
++
++
++
++@NgModule({
++  declarations: [
++    Home
++  ],
++  imports: [
++    CommonModule
++  ]
++})
++export class HomeModule { }
+diff --git a/frontend/src/app/home/home/home.css b/frontend/src/app/home/home/home.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/frontend/src/app/home/home/home.html b/frontend/src/app/home/home/home.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..5f2c53ffd520ab9f3060cebc8d9455c1c96a24b8
+--- /dev/null
++++ b/frontend/src/app/home/home/home.html
+@@ -0,0 +1 @@
++<p>home works!</p>
+diff --git a/frontend/src/app/home/home/home.spec.ts b/frontend/src/app/home/home/home.spec.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..847418d9efa87310b08426c92178f167a8b4c2c4
+--- /dev/null
++++ b/frontend/src/app/home/home/home.spec.ts
+@@ -0,0 +1,23 @@
++import { ComponentFixture, TestBed } from '@angular/core/testing';
++
++import { Home } from './home';
++
++describe('Home', () => {
++  let component: Home;
++  let fixture: ComponentFixture<Home>;
++
++  beforeEach(async () => {
++    await TestBed.configureTestingModule({
++      declarations: [Home]
++    })
++    .compileComponents();
++
++    fixture = TestBed.createComponent(Home);
++    component = fixture.componentInstance;
++    fixture.detectChanges();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++});
+diff --git a/frontend/src/app/home/home/home.ts b/frontend/src/app/home/home/home.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..ee3b6ca51d05a375ef977f0162fe9688a55cbc5c
+--- /dev/null
++++ b/frontend/src/app/home/home/home.ts
+@@ -0,0 +1,11 @@
++import { Component } from '@angular/core';
++
++@Component({
++  selector: 'app-home',
++  standalone: false,
++  templateUrl: './home.html',
++  styleUrl: './home.css'
++})
++export class Home {
++
++}
+diff --git a/frontend/src/app/models/api-response.ts b/frontend/src/app/models/api-response.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..f1ff83017b31a1860d2191204c9d090a67017bcd
+--- /dev/null
++++ b/frontend/src/app/models/api-response.ts
+@@ -0,0 +1,4 @@
++export interface ApiResponse<T> {
++  data: T;
++  errors?: string[];
++}
+diff --git a/frontend/src/app/models/attendance.ts b/frontend/src/app/models/attendance.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..216549ae2bccfb3552c7e77ed736103e1a84163f
+--- /dev/null
++++ b/frontend/src/app/models/attendance.ts
+@@ -0,0 +1,7 @@
++export interface Attendance {
++  id: number;
++  studentId: number;
++  date: string; // ISO date
++  status: 'PRESENTE' | 'ASSENTE';
++  approvato: boolean;
++}
+diff --git a/frontend/src/app/models/forms.ts b/frontend/src/app/models/forms.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..0cebe7defd9ed704f22f1f869c08d5d959a7f022
+--- /dev/null
++++ b/frontend/src/app/models/forms.ts
+@@ -0,0 +1,15 @@
++export interface LoginForm {
++  username: string;
++  password: string;
++}
++
++export interface AttendanceForm {
++  date: string;
++  status: 'PRESENTE' | 'ASSENTE';
++}
++
++export interface JustificationForm {
++  date: string;
++  tipo: string;
++  note?: string;
++}
+diff --git a/frontend/src/app/models/justification.ts b/frontend/src/app/models/justification.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..78a2940dfb8bd6da44398eeeeeacc72cc96809d2
+--- /dev/null
++++ b/frontend/src/app/models/justification.ts
+@@ -0,0 +1,8 @@
++export interface Justification {
++  id: number;
++  studentId: number;
++  date: string;
++  tipo: string;
++  approvato: boolean;
++  note?: string;
++}
+diff --git a/frontend/src/app/models/notification.ts b/frontend/src/app/models/notification.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..b23b6224d4c14273b018620ce88679980e758955
+--- /dev/null
++++ b/frontend/src/app/models/notification.ts
+@@ -0,0 +1,6 @@
++export interface Notification {
++  id: number;
++  userId: number;
++  message: string;
++  read: boolean;
++}
+diff --git a/frontend/src/app/models/user.ts b/frontend/src/app/models/user.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..d74269a7e354ddf604cfd310f1bf8e8615dd78d8
+--- /dev/null
++++ b/frontend/src/app/models/user.ts
+@@ -0,0 +1,8 @@
++export interface User {
++  id: number;
++  nome: string;
++  cognome: string;
++  email: string;
++  ruolo: 'STUDENTE' | 'TUTOR' | 'ADMIN';
++  token?: string;
++}
+diff --git a/frontend/src/app/shared/shared-module.ts b/frontend/src/app/shared/shared-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..76cf203175626f05bbcca57d83b00f184669a1c8
+--- /dev/null
++++ b/frontend/src/app/shared/shared-module.ts
+@@ -0,0 +1,12 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++
++
++
++@NgModule({
++  declarations: [],
++  imports: [
++    CommonModule
++  ]
++})
++export class SharedModule { }
+diff --git a/frontend/src/app/student-dashboard/services/student-attendance.service.ts b/frontend/src/app/student-dashboard/services/student-attendance.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..05181587a46f4436c17d4d89facae1c3363cb8ae
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/services/student-attendance.service.ts
+@@ -0,0 +1,9 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { Attendance } from '../../models/attendance';
++
++@Injectable({ providedIn: 'root' })
++export class StudentAttendanceService {
++  private recordsSubject = new BehaviorSubject<Attendance[]>([]);
++  records$ = this.recordsSubject.asObservable();
++}
+diff --git a/frontend/src/app/student-dashboard/services/student-justification.service.ts b/frontend/src/app/student-dashboard/services/student-justification.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..8a4247dbc4eebf2dfa2a25e507b1ffc48d658b19
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/services/student-justification.service.ts
+@@ -0,0 +1,9 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { Justification } from '../../models/justification';
++
++@Injectable({ providedIn: 'root' })
++export class StudentJustificationService {
++  private justificationsSubject = new BehaviorSubject<Justification[]>([]);
++  justifications$ = this.justificationsSubject.asObservable();
++}
+diff --git a/frontend/src/app/student-dashboard/student-dashboard-module.ts b/frontend/src/app/student-dashboard/student-dashboard-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..17499a559d452a42edff2b061aba0b05cbbee4db
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/student-dashboard-module.ts
+@@ -0,0 +1,15 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++import { StudentDashboard } from './student-dashboard/student-dashboard';
++
++
++
++@NgModule({
++  declarations: [
++    StudentDashboard
++  ],
++  imports: [
++    CommonModule
++  ]
++})
++export class StudentDashboardModule { }
+diff --git a/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.css b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.html b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..20885eac171e5955b647add90d131a59162232f7
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.html
+@@ -0,0 +1 @@
++<p>student-dashboard works!</p>
+diff --git a/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.spec.ts b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.spec.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..4955ac7aefc5de98b8dc358f8f1a84d81cadddb9
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.spec.ts
+@@ -0,0 +1,23 @@
++import { ComponentFixture, TestBed } from '@angular/core/testing';
++
++import { StudentDashboard } from './student-dashboard';
++
++describe('StudentDashboard', () => {
++  let component: StudentDashboard;
++  let fixture: ComponentFixture<StudentDashboard>;
++
++  beforeEach(async () => {
++    await TestBed.configureTestingModule({
++      declarations: [StudentDashboard]
++    })
++    .compileComponents();
++
++    fixture = TestBed.createComponent(StudentDashboard);
++    component = fixture.componentInstance;
++    fixture.detectChanges();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++});
+diff --git a/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.ts b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..6832352df79e13ae2b490e3fd42f23eb2b58a7c4
+--- /dev/null
++++ b/frontend/src/app/student-dashboard/student-dashboard/student-dashboard.ts
+@@ -0,0 +1,11 @@
++import { Component } from '@angular/core';
++
++@Component({
++  selector: 'app-student-dashboard',
++  standalone: false,
++  templateUrl: './student-dashboard.html',
++  styleUrl: './student-dashboard.css'
++})
++export class StudentDashboard {
++
++}
+diff --git a/frontend/src/app/tutor-dashboard/services/student-management.service.ts b/frontend/src/app/tutor-dashboard/services/student-management.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..5943761e18908053f32668b46f2e7f3ad168c20c
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/services/student-management.service.ts
+@@ -0,0 +1,9 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { User } from '../../models/user';
++
++@Injectable({ providedIn: 'root' })
++export class StudentManagementService {
++  private studentsSubject = new BehaviorSubject<User[]>([]);
++  students$ = this.studentsSubject.asObservable();
++}
+diff --git a/frontend/src/app/tutor-dashboard/services/tutor-attendance.service.ts b/frontend/src/app/tutor-dashboard/services/tutor-attendance.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..cc597bb51cd158654bfeb94172368c5193f3150f
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/services/tutor-attendance.service.ts
+@@ -0,0 +1,9 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { Attendance } from '../../models/attendance';
++
++@Injectable({ providedIn: 'root' })
++export class TutorAttendanceService {
++  private approvalsSubject = new BehaviorSubject<Attendance[]>([]);
++  approvals$ = this.approvalsSubject.asObservable();
++}
+diff --git a/frontend/src/app/tutor-dashboard/services/tutor-justification.service.ts b/frontend/src/app/tutor-dashboard/services/tutor-justification.service.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..232e9ea3c6a743dce6daf987913aab3567a16797
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/services/tutor-justification.service.ts
+@@ -0,0 +1,9 @@
++import { Injectable } from '@angular/core';
++import { BehaviorSubject } from 'rxjs';
++import { Justification } from '../../models/justification';
++
++@Injectable({ providedIn: 'root' })
++export class TutorJustificationService {
++  private reviewSubject = new BehaviorSubject<Justification[]>([]);
++  review$ = this.reviewSubject.asObservable();
++}
+diff --git a/frontend/src/app/tutor-dashboard/tutor-dashboard-module.ts b/frontend/src/app/tutor-dashboard/tutor-dashboard-module.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..b6d84fb967859ec72f913ba85d0db2ff783039f7
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/tutor-dashboard-module.ts
+@@ -0,0 +1,15 @@
++import { NgModule } from '@angular/core';
++import { CommonModule } from '@angular/common';
++import { TutorDashboard } from './tutor-dashboard/tutor-dashboard';
++
++
++
++@NgModule({
++  declarations: [
++    TutorDashboard
++  ],
++  imports: [
++    CommonModule
++  ]
++})
++export class TutorDashboardModule { }
+diff --git a/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.css b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.html b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..602465da164c34504da7d0fd24e6e5f619c247de
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.html
+@@ -0,0 +1 @@
++<p>tutor-dashboard works!</p>
+diff --git a/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.spec.ts b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.spec.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..3c57a85f06ddfa05784e453a394bc69def382774
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.spec.ts
+@@ -0,0 +1,23 @@
++import { ComponentFixture, TestBed } from '@angular/core/testing';
++
++import { TutorDashboard } from './tutor-dashboard';
++
++describe('TutorDashboard', () => {
++  let component: TutorDashboard;
++  let fixture: ComponentFixture<TutorDashboard>;
++
++  beforeEach(async () => {
++    await TestBed.configureTestingModule({
++      declarations: [TutorDashboard]
++    })
++    .compileComponents();
++
++    fixture = TestBed.createComponent(TutorDashboard);
++    component = fixture.componentInstance;
++    fixture.detectChanges();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++});
+diff --git a/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.ts b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..5994096bbc39f69489883ea88f18f282d2559d58
+--- /dev/null
++++ b/frontend/src/app/tutor-dashboard/tutor-dashboard/tutor-dashboard.ts
+@@ -0,0 +1,11 @@
++import { Component } from '@angular/core';
++
++@Component({
++  selector: 'app-tutor-dashboard',
++  standalone: false,
++  templateUrl: './tutor-dashboard.html',
++  styleUrl: './tutor-dashboard.css'
++})
++export class TutorDashboard {
++
++}
+diff --git a/frontend/src/index.html b/frontend/src/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..3af61ec9be6069adc54c86431f653d1982e8f9f8
+--- /dev/null
++++ b/frontend/src/index.html
+@@ -0,0 +1,13 @@
++<!doctype html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++  <title>Frontend</title>
++  <base href="/">
++  <meta name="viewport" content="width=device-width, initial-scale=1">
++  <link rel="icon" type="image/x-icon" href="favicon.ico">
++</head>
++<body>
++  <app-root></app-root>
++</body>
++</html>
+diff --git a/frontend/src/main.ts b/frontend/src/main.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..40c6c68c79a5f9641d1bb93d75dfb5f3ae314868
+--- /dev/null
++++ b/frontend/src/main.ts
+@@ -0,0 +1,7 @@
++import { platformBrowser } from '@angular/platform-browser';
++import { AppModule } from './app/app-module';
++
++platformBrowser().bootstrapModule(AppModule, {
++  ngZoneEventCoalescing: true,
++})
++  .catch(err => console.error(err));
+diff --git a/frontend/src/styles.css b/frontend/src/styles.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..90d4ee0072ce3fc41812f8af910219f9eea3c3de
+--- /dev/null
++++ b/frontend/src/styles.css
+@@ -0,0 +1 @@
++/* You can add global styles to this file, and also import other style files */
+diff --git a/frontend/tsconfig.app.json b/frontend/tsconfig.app.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..264f459bf8765c2eeb6a818ad09ad37a9cb4ff60
+--- /dev/null
++++ b/frontend/tsconfig.app.json
+@@ -0,0 +1,15 @@
++/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
++/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
++{
++  "extends": "./tsconfig.json",
++  "compilerOptions": {
++    "outDir": "./out-tsc/app",
++    "types": []
++  },
++  "include": [
++    "src/**/*.ts"
++  ],
++  "exclude": [
++    "src/**/*.spec.ts"
++  ]
++}
+diff --git a/frontend/tsconfig.json b/frontend/tsconfig.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..e4955f26b14bfa5dc1570562cbc590a7e9cb076c
+--- /dev/null
++++ b/frontend/tsconfig.json
+@@ -0,0 +1,34 @@
++/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
++/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
++{
++  "compileOnSave": false,
++  "compilerOptions": {
++    "strict": true,
++    "noImplicitOverride": true,
++    "noPropertyAccessFromIndexSignature": true,
++    "noImplicitReturns": true,
++    "noFallthroughCasesInSwitch": true,
++    "skipLibCheck": true,
++    "isolatedModules": true,
++    "experimentalDecorators": true,
++    "importHelpers": true,
++    "target": "ES2022",
++    "module": "preserve"
++  },
++  "angularCompilerOptions": {
++    "enableI18nLegacyMessageIdFormat": false,
++    "strictInjectionParameters": true,
++    "strictInputAccessModifiers": true,
++    "typeCheckHostBindings": true,
++    "strictTemplates": true
++  },
++  "files": [],
++  "references": [
++    {
++      "path": "./tsconfig.app.json"
++    },
++    {
++      "path": "./tsconfig.spec.json"
++    }
++  ]
++}
+diff --git a/frontend/tsconfig.spec.json b/frontend/tsconfig.spec.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..04df34cfe778571fb16bc783911a7c060fa26f59
+--- /dev/null
++++ b/frontend/tsconfig.spec.json
+@@ -0,0 +1,14 @@
++/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
++/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
++{
++  "extends": "./tsconfig.json",
++  "compilerOptions": {
++    "outDir": "./out-tsc/spec",
++    "types": [
++      "jasmine"
++    ]
++  },
++  "include": [
++    "src/**/*.ts"
++  ]
++}
+ 
+EOF
+)
