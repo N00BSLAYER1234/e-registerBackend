@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared-module';
 
 import { TutorDashboardRoutingModule } from './tutor-dashboard-routing-module';
 import { TutorDashboard } from './tutor-dashboard';
@@ -11,7 +12,8 @@ import { TutorDashboard } from './tutor-dashboard';
   ],
   imports: [
     CommonModule,
-    TutorDashboardRoutingModule
+    TutorDashboardRoutingModule,
+    SharedModule
   ]
 })
 export class TutorDashboardModule { }

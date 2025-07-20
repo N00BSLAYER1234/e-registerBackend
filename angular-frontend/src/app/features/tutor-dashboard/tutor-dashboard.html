@@ -1,1 +1,6 @@
-<p>tutor-dashboard works!</p>
+<div class="p-4">
+  <h2 class="text-xl mb-2">Students</h2>
+  <ul class="list-disc pl-5">
+    <li *ngFor="let s of (students$ | async)">{{ s.username }} ({{ s.role }})</li>
+  </ul>
+</div>

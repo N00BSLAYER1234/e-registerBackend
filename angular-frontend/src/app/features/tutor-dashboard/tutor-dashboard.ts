@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { StudentManagementService } from './services/student-management.service';
 
 @Component({
   selector: 'app-tutor-dashboard',
@@ -7,6 +8,14 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrl: './tutor-dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TutorDashboard {
+export class TutorDashboard implements OnInit {
+  students$;
 
+  constructor(private studentsService: StudentManagementService) {
+    this.students$ = studentsService.students$;
+  }
+
+  ngOnInit(): void {
+    this.studentsService.load();
+  }
 }

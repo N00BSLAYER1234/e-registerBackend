@@ -1,1 +1,14 @@
-<p>student-dashboard works!</p>
+<div class="p-4">
+  <h2 class="text-xl mb-2">Attendance History</h2>
+  <table class="min-w-full border">
+    <thead>
+      <tr><th class="border p-1">Date</th><th class="border p-1">Status</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of (attendances$ | async)">
+        <td class="border p-1">{{ a.date }}</td>
+        <td class="border p-1">{{ a.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
